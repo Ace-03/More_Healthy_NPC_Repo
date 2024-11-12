@@ -41,6 +41,11 @@ public class NumerOfHitsHealth : MonoBehaviour, IHealth
         }
     }
 
+    public void GainHealth(int amount)
+    {
+        Debug.Log("Gain Health");
+    }
+
     private IEnumerator InvunlerabilityTimer()
     {
         canTakeDamage = false;

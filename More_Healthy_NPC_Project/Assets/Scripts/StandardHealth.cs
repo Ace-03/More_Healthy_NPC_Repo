@@ -31,6 +31,25 @@ public class StandardHealth : MonoBehaviour, IHealth
 
         if (CurrentHpPct <= 0)
             Die();
+
+        Debug.Log(currentHealth);
+    }
+
+    public void GainHealth(int amount)
+    {
+        if (amount >= 100)
+            throw new ArgumentOutOfRangeException("Invalid Health amount specified: " + amount);
+
+        currentHealth += amount;
+
+        OnHPPctChanged(CurrentHpPct);
+
+        if (currentHealth >= 100)
+        {
+            currentHealth = 100;
+        }
+
+        Debug.Log(currentHealth);
     }
 
     private void Die()

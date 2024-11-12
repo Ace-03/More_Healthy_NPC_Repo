@@ -3,4 +3,5 @@
     event System.Action<float> OnHPPctChanged;
     event System.Action OnDied;
     void TakeDamage(int amount);
+    void GainHealth(int amount);
 }
