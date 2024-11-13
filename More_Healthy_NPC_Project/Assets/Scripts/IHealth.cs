@@ -4,4 +4,5 @@
     event System.Action OnDied;
     void TakeDamage(int amount);
     void GainHealth(int amount);
+    void GetPoisoned(int amount);
 }

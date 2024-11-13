@@ -7,6 +7,7 @@ public class NPC : MonoBehaviour
     [SerializeField] private int startingHp = 100;
     [SerializeField] private UnityEngine.UI.Slider hpBarSlider = null;
 
+
     internal void TakeDamage(int amount)
     {
         GetComponent<IHealth>().TakeDamage(amount);
@@ -17,12 +18,16 @@ public class NPC : MonoBehaviour
         GetComponent<IHealth>().GainHealth(amount);
     }
 
+    internal void GetPoisoned(int amount)
+    { 
+        GetComponent<IHealth>().GetPoisoned(amount);
+    }
+
     private void Update()
     {
         transform.position += transform.forward * moveSpeed * Time.deltaTime;
         transform.Rotate(0f, turnSpeed * Time.deltaTime, 0f);
         hpBarSlider.transform.LookAt(Camera.main.transform);
-
 
 
         if (Input.GetKeyDown(KeyCode.Space))
@@ -33,6 +38,11 @@ public class NPC : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.W))
         {
             GainHealth(startingHp / 10);
+        }
+
+        if(Input.GetKeyDown(KeyCode.S)) 
+        {
+            GetPoisoned(startingHp / 10);
         }
     }
 }

@@ -8,7 +8,7 @@ public class NumerOfHitsHealth : MonoBehaviour, IHealth
     private int healthInHits = 5;
 
     [SerializeField]
-    private float invulnerabilityTimeAfterEachHit = 5f;
+    private float invulnerabilityTimeAfterEachHit = 50f;
 
     private int hitsRemaining;
     private bool canTakeDamage = true;
@@ -28,6 +28,7 @@ public class NumerOfHitsHealth : MonoBehaviour, IHealth
 
     public void TakeDamage(int amount)
     {
+        
         if (canTakeDamage)
         {
             StartCoroutine(InvunlerabilityTimer());
@@ -39,11 +40,32 @@ public class NumerOfHitsHealth : MonoBehaviour, IHealth
             if (hitsRemaining <= 0)
                 OnDied();
         }
+        
     }
 
     public void GainHealth(int amount)
     {
-        Debug.Log("Gain Health");
+        if (canTakeDamage)
+        {
+            hitsRemaining++;
+
+            OnHPPctChanged(CurrentHpPct);
+        }
+    }
+
+    public void GetPoisoned(int amount)
+    {
+        if (canTakeDamage)
+        {
+            StartCoroutine(InvunlerabilityTimer());
+
+            hitsRemaining--;
+
+            OnHPPctChanged(CurrentHpPct);
+
+            if (hitsRemaining <= 0)
+                OnDied();
+        }
     }
 
     private IEnumerator InvunlerabilityTimer()
